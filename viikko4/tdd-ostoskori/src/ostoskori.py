@@ -31,10 +31,11 @@ class Ostoskori:
         ostos = Ostos(poistettava)
         for o in self.sisalto:
             if o.tuotteen_nimi() == ostos.tuotteen_nimi():
-                o.muuta_lukumaaraa(-1)
+                if o.lukumaara() == 0:
+                    self.sisalto.remove(o)
+                else: 
+                    o.muuta_lukumaaraa(-1)
                 return
-
-        self.sisalto.remove(ostos)
 
     def tyhjenna(self):
         self.sisalto.clear()
